@@ -1,42 +1,27 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+import locators
 
 
 class TestConstructorSectionChoice:
 
-    def test_move_to_souses_section(self, url):
-        driver = webdriver.Chrome()
-        driver.maximize_window()
+    def test_move_to_souses_section(self, driver):
 
-        driver.get(url)
-        element = driver.find_element(By.XPATH, "//span[text() = 'Соусы']")
+        element = driver.find_element(By.XPATH, locators.souses_section)
         element.click()
 
-        assert driver.find_element(By.XPATH, "//span[text() = 'Соусы']/parent::*[contains(@class, 'current')]")
+        assert driver.find_element(By.XPATH, locators.souses_is_current)
 
-        driver.quit()
+    def test_move_to_toppings_section(self, driver):
 
-    def test_move_to_toppings_section(self, url):
-        driver = webdriver.Chrome()
-        driver.maximize_window()
-
-        driver.get(url)
-        element = driver.find_element(By.XPATH, "//span[text() = 'Начинки']")
+        element = driver.find_element(By.XPATH, locators.toppings_section)
         element.click()
 
-        assert driver.find_element(By.XPATH, "//span[text() = 'Начинки']/parent::*[contains(@class, 'current')]")
+        assert driver.find_element(By.XPATH, locators.toppings_is_current)
 
-        driver.quit()
+    def test_move_to_buns_section(self, driver):
 
-    def test_move_to_buns_section(self, url):
-        driver = webdriver.Chrome()
-        driver.maximize_window()
-
-        driver.get(url)
-        driver.find_element(By.XPATH, "//span[text() = 'Начинки']").click()
-        element = driver.find_element(By.XPATH, "//span[text() = 'Булки']")
+        driver.find_element(By.XPATH, locators.toppings_section).click()
+        element = driver.find_element(By.XPATH, locators.buns_section)
         element.click()
 
-        assert driver.find_element(By.XPATH, "//span[text() = 'Булки']/parent::*[contains(@class, 'current')]")
-
-        driver.quit()
+        assert driver.find_element(By.XPATH, locators.buns_is_current)
